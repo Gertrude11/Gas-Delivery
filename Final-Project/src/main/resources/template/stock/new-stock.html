@@ -1,0 +1,92 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="/components/header"></th:block>
+
+<body>
+<main class="container">
+    <h2 class="text-center">Create New Stock</h2>
+    <form role="form" method="post" th:action="@{/stocks/new}" th:object="${stock}">
+
+        <div class="row col-5">
+            <div class="form-group col">
+                <label > Choose Cylinder</label>
+                <select class="form-control" name="cylinder" id="cylinderSelect" th:field="*{cylinder}" required>
+                    <th:block th:each="fue : ${cylinderObj}">
+                        <option th:value="${fue.id}" th:text="${fue.code + ' - ' + fue.name}"  ></option>
+                    </th:block>
+                </select>
+            </div>
+        </div>
+
+        <div class="row col-5">
+            <div class="form-group col">
+                <label>Selected Cylinder Details:</label>
+                <span id="selectedCylinderDetails"></span>
+            </div>
+        </div>
+
+        <div class="row col-5">
+            <div class="form-group col">
+                <label >Unit Price</label>
+                <input type="text" class="form-control" id="UnitPrice" name="UnitPrice" th:field="*{price}" required>
+            </div>
+        </div>
+        <div class="row col-5">
+            <div class="form-group col">
+                <label >Quantity</label>
+                <input type="text" class="form-control" id="quantity" name="quantity" th:field="*{quantity}" required>
+            </div>
+        </div>
+        <div class="row col-5">
+            <div class="form-group col">
+
+                <p>Total Cost: <span id="totalCost"></span></p>
+                <input type="text" class="form-control" id="total_Cost" name="total_Cost" th:field="*{total_cost}" readonly>
+
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</main>
+
+</body>
+</html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get references to the relevant elements
+        var fuelSelect = document.getElementById("cylinderSelect");
+        var selectedCylinderDetails = document.getElementById("selectedCylinderDetails");
+        var unitPriceInput = document.getElementById("UnitPrice");
+        var quantityInput = document.getElementById("quantity");
+        var totalCostSpan = document.getElementById("totalCost");
+        var totalCostInput = document.getElementById("total_Cost"); // Update the variable name
+
+        // Add event listeners for the input change events
+        fuelSelect.addEventListener("change", updateSelectedCylinderDetails);
+        unitPriceInput.addEventListener("input", calculateTotalCost);
+        quantityInput.addEventListener("input", calculateTotalCost);
+
+        // Function to update the selected cylinder details
+        function updateSelectedCylinderDetails() {
+            var selectedOption = fuelSelect.options[fuelSelect.selectedIndex];
+            selectedCylinderDetails.textContent = selectedOption.text;
+        }
+
+        // Function to update the total cost based on unit price and quantity
+        function calculateTotalCost() {
+            // Get user inputs
+            var quantity = parseInt(quantityInput.value) || 0;
+            var price = parseFloat(unitPriceInput.value) || 0;
+
+            // Calculate total cost
+            var totalCost = quantity * price;
+
+            // Update the total cost on the page
+            totalCostSpan.textContent = totalCost.toFixed(2); // Update the target element
+
+            // Update the total cost in the input field
+            totalCostInput.value = totalCost.toFixed(2);
+        }
+    });
+</script>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<p>Dear Customer,</p>
+<p>Thank you for your payment. Here are your order details:</p>
+
+<!-- Iterate over the list of orders -->
+<div th:each="order, orderStat : ${order}">
+  <div>
+    <h2 th:text="${orderStat.index + 1}">Order Title</h2>
+
+    <!-- Iterate over cylinders and display fuel_type for each -->
+    <div th:each="cylinder : ${order.cylinders}">
+      <p><strong>Gas Type:</strong> <span th:text="${cylinder.fuels.fuel_type}"></span></p>
+    </div>
+
+    <p><strong>Full Names:</strong> <span th:text="${order.fullNames}"></span></p>
+    <p><strong>Email:</strong> <span th:text="${order.email}"></span></p>
+
+    <p th:if="${not #lists.isEmpty(order.cylinders)}">
+      <strong>Weight:</strong> <span th:text="${order.cylinders[0].capacity}"></span>
+    </p>
+    <p th:if="${not #lists.isEmpty(order.cylinders)}">
+      <strong>Price:</strong> <span th:text="${order.cylinders[0].price}"></span>
+    </p>
+
+    <p><strong>Quantity:</strong> <span th:text="${order.quantity}"></span></p>
+    <p><strong>Destination:</strong> <span th:text="${order.destination}"></span></p>
+    <p><strong>Order Date:</strong> <span
+            th:text="${#temporals.format(order.order_date, 'yyyy-MM-dd')}"></span></p>
+    <p><strong>Delivery Date:</strong> <span
+            th:text="${#temporals.format(order.delivery_date, 'yyyy-MM-dd')}"></span></p>
+    <p><strong>Delivery Time:</strong> <span th:text="${order.delivery_hours}"></span></p>
+
+    <p><strong>Total Cost:</strong> <span th:text="${order.total_cost ?: 0}"></span></p>
+
+    <p th:if="${order.paid}">Payment Done</p>
+
+  </div>
+</div>
+
+<p>Best regards,</p>
+<p>Happy Cooking</p>
+</body>
+
+</html>

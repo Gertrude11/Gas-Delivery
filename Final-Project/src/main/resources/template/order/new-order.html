@@ -1,0 +1,180 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<style>
+   img{
+       float: right;
+   }
+</style>
+<th:block th:include="/components/header"></th:block>
+
+<body>
+<script th:if="${errorMessage != null}">
+    alert([[${errorMessage}]]); // Using double brackets to avoid Thymeleaf processing
+</script>
+
+<main class="container">
+    <img src="https://th.bing.com/th/id/OIP.B2kFzDah5Sbj2k1Fr04f9QHaHa?rs=1&pid=ImgDetMain
+    ">
+    <h2 class="text-center">Create New order</h2>
+
+
+    <form role="form" method="post" th:action="@{/customerOrders/new}" th:object="${customerOrder}">
+
+
+        <div class="row col-5">
+            <div class="form-group col">
+                <label >Full Names</label>
+                <input type="text" class="form-control" id="names" name="names" th:field="*{fullNames}" required>
+            </div>
+        </div>
+        <div class="row col-5">
+            <div class="form-group col">
+                <label >Phone Number</label>
+                <input type="text" class="form-control" id="phone" name="phone" th:field="*{phone}" required>
+            </div>
+        </div>
+        <div class="row col-5">
+            <div class="form-group col">
+                <label >Email</label>
+                <input type="email" class="form-control" id="email" name="email" th:field="*{email}" required>
+            </div>
+        </div>
+
+        <div class="row col-5">
+            <div class="form-group col">
+                <label >Name of your Order</label>
+                <input type="text" class="form-control" id="name" name="name" th:field="*{name}" required>
+            </div>
+        </div>
+        <div class="row col-5">
+            <div class="form-group col">
+                <label > Choose Cylinder</label>
+                <select class="form-control" name="cylinder" id="cylinderSelect" th:field="*{cylinders}" required>
+                    <th:block th:each="fue : ${allCylinders}">
+                        <option th:value="${fue.id}" th:text="${'weight: ' + fue.weight + ', price: '  + fue.price+', contains: '+ fue.fuels.fuel_type.name}"  ></option>
+
+                    </th:block>
+                </select>
+
+            </div>
+        </div>
+        <p>Selected Cylinder Price: <span id="selectedCylinderPrice"></span></p>
+
+        <div class="row col-5">
+            <div class="form-group col">
+                <label >Quantity</label>
+                <input type="text" class="form-control" id="quantity" name="quantity" th:field="*{quantity}" required>
+            </div>
+        </div>
+        <div class="row col-5">
+            <div class="form-group col">
+                <label >Destination / Delivery Place</label>
+                <input type="text" class="form-control" id="destination" name="destination" th:field="*{destination}" required>
+            </div>
+        </div>
+        <div class="row col-5">
+            <div class="form-group col">
+                <label >Delivery date</label>
+                <input type="date" class="form-control" id="dedate" name="dedate" th:field="*{delivery_date}" required>
+            </div>
+        </div>
+
+        <div class="row col-5">
+            <div class="form-group col">
+                <label for="deliveryHours">Delivery Hours</label>
+                <select class="form-control" id="deliveryHours" name="deliveryHours" th:field="*{delivery_hours}" required>
+                    <!-- Add your options for delivery hours here -->
+                    <option value="9:00 AM">9:00 AM</option>
+                    <option value="10:00 AM">10:00 AM</option>
+                    <option value="11:00 AM">12:00 AM</option>
+                    <option value="11:00 AM">13:00 PM</option>
+                    <option value="11:00 AM">14:00 PM</option>
+                    <option value="11:00 AM">15:00 PM</option>
+                    <option value="11:00 AM">16:00 PM</option>
+                    <option value="11:00 AM">17:00 PM</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+        </div>
+        <div class="row col-5">
+            <div class="form-group col">
+
+                <p>Total Cost: <span id="totalCost">0.0</span></p>
+                <input type="text" class="form-control" id="total_Cost" name="total_Cost" th:field="*{total_cost}" readonly>
+
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</main>
+
+</body>
+</html>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get references to the relevant elements
+        var fuelSelect = document.getElementById("cylinderSelect");
+        var selectedCylinderPriceSpan = document.getElementById("selectedCylinderPrice");
+        //var unitPriceInput = document.getElementById("UnitPrice");
+        var quantityInput = document.getElementById("quantity");
+        var totalCostSpan = document.getElementById("totalCost");
+        var totalCostInput = document.getElementById("total_Cost");
+
+        // Add event listeners for the input change events
+        fuelSelect.addEventListener("change", updateSelectedCylinderDetails);
+        selectedCylinderPriceSpan.addEventListener("input", calculateTotalCost);
+        quantityInput.addEventListener("input", calculateTotalCost);
+
+        // Function to update the selected cylinder details
+
+        function updateSelectedCylinderDetails() {
+            var selectedOption = fuelSelect.options[fuelSelect.selectedIndex];
+            console.log("Selected Option Text:", selectedOption.text);
+            selectedCylinderPriceSpan.textContent = getPriceFromOptionText(selectedOption.text);
+        }
+
+
+
+        // Function to extract price from the option text
+        function getPriceFromOptionText(optionText) {
+            // Assuming the format is "weight: X, price: Y, contains: Z"
+            var regex = /price: (\d+(\.\d+)?)/;
+            var match = optionText.match(regex);
+
+            // Check if the regex matched the price
+            if (match && match.length >= 2) {
+                return parseFloat(match[1]);
+            }
+
+            // Default to 0.0 if no match is found
+            return 0.0;
+        }
+
+
+
+        // Function to update the total cost based on unit price and quantity
+        function calculateTotalCost() {
+            // Get user inputs
+            var quantity = parseInt(quantityInput.value) || 0;
+
+            // Get the selected option in the fuel dropdown
+            var selectedOption = fuelSelect.options[fuelSelect.selectedIndex];
+
+            // Extract the price from the selected option text
+            var price = getPriceFromOptionText(selectedOption.text);
+
+            // Calculate total cost
+            var totalCost = quantity * price;
+
+
+            // Update the total cost on the page
+            totalCostSpan.textContent = totalCost.toFixed(2);
+
+            // Update the total cost in the input field
+            totalCostInput.value = totalCost.toFixed(2);
+        }
+    });
+</script>

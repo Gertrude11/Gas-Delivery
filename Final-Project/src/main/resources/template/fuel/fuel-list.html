@@ -1,0 +1,59 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="/components/header"></th:block>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+
+<body>
+<main class="container">
+    <h1 class="text-center mb-4">Lists of Fuels</h1>
+    <table class="table table-dark table-hover" >
+        <thead class="light">
+        <tr>
+            <th scope="col">UUID</th>
+            <th scope="col">Fuel Code</th>
+            <th scope="col">Fuel Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="Fuel :${allFuels}">
+            <td th:text="${Fuel.id}"></td>
+            <td th:text="${Fuel.code}"></td>
+            <td th:text="${Fuel.name}"></td>
+            <td th:text="${Fuel.fuel_type}"></td>
+            <td th:text="${Fuel.brand}"></td>
+
+            <td>
+
+                <a  class="btn btn-info" th:href="@{/fuels/{id}/edit_fuel(id=${Fuel.id})}" role="button">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+
+                <a class="btn btn-danger" th:href="@{/fuels/{id}/delete_fuel(id=${Fuel.id})}" role="button" onclick="return confirmDelete()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5"></td>
+            <td>
+                <a class="btn btn-success" th:href="@{/fuels/new}" role="button">
+                    <span class="glyphicon glyphicon-plus"></span>Add New Fuel
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this Fuel?");
+    }
+
+</script>
+</html>

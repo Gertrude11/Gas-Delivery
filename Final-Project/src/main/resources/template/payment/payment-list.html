@@ -1,0 +1,36 @@
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="/components/header"></th:block>
+<body>
+
+<main class="container">
+    <h1 class="text-center mb-4">Order and Payment Details</h1>
+    <table class="table table-dark table-hover" >
+        <thead class="light">
+        <tr>
+        <th scope="col">Payment ID</th>
+        <th scope="col">Customer Names</th>
+        <th scope="col">Payment Mode</th>
+        <th scope="col">Amount Paid</th>
+        <th scope="col">Card Number</th>
+        <th scope="col">Payment Date</th>
+        <th scope="col">Payment Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="payment : ${allPayments}">
+        <td th:text="${payment.id}"></td>
+        <td th:text="${payment.customerOrder.fullNames}"></td>
+        <td th:text="${payment.payment_mode}"></td>
+        <td th:text="${payment.customerOrder.total_cost}"></td>
+        <td th:text="${payment.payment_number}"></td>
+        <td th:text="${payment.payment_date}"></td>
+        <td th:text="${payment.status}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+</body>
+</html>

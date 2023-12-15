@@ -1,0 +1,86 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="/components/header"></th:block>
+
+<body>
+<main class="container">
+    <h2 class="text-center">Create New payment</h2>
+    <form role="form" method="post" th:action="@{'/' + ${orderId} + '/makepayment' }" th:object="${payment}">
+
+
+
+        <div class="row col-5">
+            <div class="form-group col">
+                <label>Customer Order</label>
+                <select class="form-control" id="customerOrder" name="orderId" th:field="*{customerOrder}" required>
+                    <th:block th:if="${allCustomerOrders.get()}">
+                        <th:block th:each="fue : ${allCustomerOrders.get()}">
+                            <option th:value="${fue.id}" th:text="${fue.name + ' - '+fue.total_cost}" />
+                        </th:block>
+                    </th:block>
+                </select>
+            </div>
+        </div>
+
+        <div class="row col-5">
+            <div class="form-group col">
+                <label>Payment Mode</label>
+                <select class="form-control" id="mode" name="mode" th:field="*{payment_mode}" required>
+                    <th:block th:each="mode : ${payment_modes}">
+                        <option th:value="${mode.name}" th:text="${mode.name}"  ></option>
+                    </th:block>
+                </select>
+            </div>
+
+        </div>
+        <div class="row col-5">
+            <div class="form-group col">
+                <label >Enter your Phone Number or Card Number for payment</label>
+                <input type="text" class="form-control" id="quantity" name="quantity" th:field="*{payment_number}" required>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</main>
+</body>
+</html>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get references to the relevant elements
+        var fuelSelect = document.getElementById("fuel");
+        var selectedpaymentDetails = document.getElementById("selectedpaymentDetails");
+        var unitPriceInput = document.getElementById("UnitPrice");
+        var quantityInput = document.getElementById("quantity");
+        var totalCostSpan = document.getElementById("totalCost");
+        var totalCostInput = document.getElementById("total_Cost"); // Update the variable name
+
+        // Add event listeners for the input change events
+        fuelSelect.addEventListener("change", updateSelectedpaymentDetails);
+        unitPriceInput.addEventListener("input", calculateTotalCost);
+        quantityInput.addEventListener("input", calculateTotalCost);
+
+        // Function to update the selected payment details
+        function updateSelectedpaymentDetails() {
+            var selectedOption = fuelSelect.options[fuelSelect.selectedIndex];
+            selectedpaymentDetails.textContent = selectedOption.text;
+        }
+
+        // Function to update the total cost based on unit price and quantity
+        function calculateTotalCost() {
+            // Get user inputs
+            var quantity = parseInt(quantityInput.value) || 0;
+            var price = parseFloat(unitPriceInput.value) || 0;
+
+            // Calculate total cost
+            var totalCost = quantity * price;
+
+            // Update the total cost on the page
+            totalCostSpan.textContent = totalCost.toFixed(2); // Update the target element
+
+            // Update the total cost in the input field
+            totalCostInput.value = totalCost.toFixed(2);
+        }
+    });
+</script>

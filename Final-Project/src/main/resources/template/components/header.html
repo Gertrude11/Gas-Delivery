@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css">
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style>
+        /* Add custom styles here */
+        .navbar-brand img {
+            max-width: 100px; /* Adjust the max-width of the logo */
+        }
+
+        #btn-back {
+            font-size: 20px; /* Adjust the font size */
+        }
+    </style>
+
+    <title>Home Gas Delivery</title>
+</head>
+
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+        <div class="container-fluid">
+            
+            <div class="d-flex align-items-md-end"> <!-- Align items vertically -->
+                <a th:href="@{/dashboard}">
+                    <button type="button" class="btn btn-default btn-sm btn-group-vertical" id="btn-back">
+                        <span class="glyphicon glyphicon-arrow-left"></span> Back
+                    </button>
+                </a>
+            </div>
+        </div>
+    </nav>
+</main>
+</body>
+
+</html>

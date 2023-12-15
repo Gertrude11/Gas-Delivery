@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your external stylesheet -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .cards {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+            width: 100%; /* Adjust as needed */
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card_content {
+            padding: 20px;
+        }
+
+        .card_title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .card_text {
+            margin-bottom: 8px;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <title>Customer Orders</title>
+</head>
+
+
+<body>
+<th:block th:include="/components/header"></th:block>
+
+<div class="main">
+    <h1>Customer Orders</h1>
+    <ul class="cards">
+        <!-- Iterate over the list of orders using Thymeleaf -->
+        <li class="cards_item" th:each="order, orderStat : ${allCustomerOrders}">
+            <div class="card">
+                <div class="card_content">
+                    <!-- Incremented order number -->
+                    <h2 class="card_title" th:text="${orderStat.index + 1}">Order Title</h2>
+
+                    <p><strong>Full Names:</strong> <span th:text="${order.fullNames}"></span></p>
+                    <p><strong>Email:</strong> <span th:text="${order.email}"></span></p>
+
+                    <!-- Iterate over cylinders and display fuel_type for each -->
+                    <div th:each="cylinder : ${order.cylinders}" class="fuel_type">
+                        <p><strong>Gas Type:  </strong> <span th:text="${cylinder.fuels.fuel_type}"></span></p>
+                    </div>
+
+                    <!-- Display properties of the first cylinder (adjust if needed) -->
+                    <p class="card_text" th:if="${not #lists.isEmpty(order.cylinders)}">
+                        <strong>Weight:</strong> <span th:text="${order.cylinders[0].weight}"></span>
+                    </p>
+                    <p class="card_text" th:if="${not #lists.isEmpty(order.cylinders)}">
+                        <strong>Price:</strong> <span th:text="${order.cylinders[0].price}"></span>
+                    </p>
+                    <!-- Display other properties of the order -->
+                    <p class="card_text"><strong>Quantity:</strong> <span th:text="${order.quantity}"></span></p>
+                    <p class="card_text"><strong>Destination:</strong> <span th:text="${order.destination}"></span></p>
+                    <p class="card_text"><strong>Order Date:</strong> <span th:text="${#temporals.format(order.order_date, 'yyyy-MM-dd')}"></span></p>
+                    <p class="card_text"><strong>Delivery Date:</strong> <span th:text="${#temporals.format(order.delivery_date, 'yyyy-MM-dd')}"></span></p>
+                    <p class="card_text"><strong>Delivery Time:</strong> <span th:text="${order.delivery_hours}"></span></p>
+                    <!-- Display total_cost of fuels (assuming fuels is a collection) -->
+                    <p class="card_text"><strong>Total Cost:</strong> <span th:text="${order.total_cost ?: 0}"></span></p>
+
+                    <p th:if="${order.paid}" class="done-icon ">✔ Payment Done</p>
+
+                    <a th:href="@{/{orderId}/makepayment (orderId=${order.id})}">
+                    <button class="btn card_btn">Read More</button>
+                    </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this Stock?");
+    }
+</script>
+</body>
+
+</html>

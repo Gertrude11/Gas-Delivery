@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registration and Login System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            margin-top: 50px;
+            border-radius: 30px;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 150px;
+            border-radius: 30px;
+            transition: box-shadow 0.3s ease-in-out; /* Add transition to box-shadow property */
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* New box-shadow on hover */
+        }
+
+
+        .card-header {
+            background-color: #2466b3;
+            color: #ffffff;
+            text-align: center;
+            padding: 15px;
+            border-radius: 30px;
+
+
+        }
+
+        .card-body {
+            padding: 40px;
+
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #495057;
+            display: block;
+
+
+        }
+        input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.42);
+            outline: none;
+            padding: 10px 14px;
+            color: #fff;
+            border: none;
+            border-radius: 36px;
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 16px;
+            transition: background 0.5s ease-in-out;
+        }
+
+        input:focus {
+            background: rgba(0, 0, 0, 0.6); /* Change background color on focus */
+            border: 2px solid #007bff; /* Add blue border on focus */
+            transform: scale(1.05); /* Increase size on focus */
+        }
+
+
+        input.form-control {
+            border-radius: 30px;
+        }
+
+        button.btn-primary {
+            background-color: green;
+            border: none;
+            border-radius: 15px;
+            text-align: center;
+
+        }
+
+        span.register-link {
+            display: block;
+            margin-top: 15px;
+            color: black;
+        }
+
+        span.register-link a {
+            color: #007bff;
+            text-decoration: none;
+            cursor: pointer;
+            border-bottom: 2px solid transparent; /* Add an underline using a border */
+            transition: border-color 0.3s ease-in-out; /* Add transition to border-color property */
+        }
+
+        span.register-link a:hover {
+            border-color: #007bff; /* Change border color on hover */
+        }
+
+
+        .alert {
+            margin-top: 10px; /* Adjust the margin-top value */
+            border-radius: 10px; /* Adjust the border-radius for rounded corners */
+            padding: 15px; /* Add padding for better spacing */
+        }
+
+        .alert-danger {
+            background-color: #dc3545; /* Adjust the background color for danger alerts */
+            color: #fff; /* Adjust the text color for better contrast */
+        }
+
+        .alert-success {
+            background-color: #28a745; /* Adjust the background color for success alerts */
+            color: #fff; /* Adjust the text color for better contrast */
+        }
+    </style>
+</head>
+
+<body>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Login Here</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" role="form" th:action="@{/login}" class="form-horizontal">
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="text" id="username" name="username" class="form-control"
+                                   placeholder="Enter email address"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Password:</label>
+                            <input type="password" id="password" name="password" class="form-control"
+                                   placeholder="Enter password"/>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <span class="register-link">Not registered?
+                                <a th:href="@{/register}"> Register/Signup here</a>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div th:if="${param.error}" class="alert alert-danger">Invalid Email or Password</div>
+            <div th:if="${param.logout}" class="alert alert-success">You have been logged out.</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

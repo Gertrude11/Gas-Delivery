@@ -1,0 +1,64 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="/components/header"></th:block>
+
+
+<body>
+<main class="container">
+    <h1 class="text-center mb-4">Lists of Cylinders</h1>
+    <table class="table table-dark table-hover">
+        <thead class="light">
+        <tr>
+            <th scope="col">UUID</th>
+            <th scope="col">Cylinder Code</th>
+            <th scope="col">Cylinder Name</th>
+            <th scope="col">Color</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Capacity</th>
+            <th scope="col">Fuel</th>
+            <th scope="col">Unit Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">TotalCost</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="cylinder :${allCylinders}">
+            <td th:text="${cylinder.id}"></td>
+            <td th:text="${cylinder.code}"></td>
+            <td th:text="${cylinder.name}"></td>
+            <td th:text="${cylinder.color}"></td>
+            <td th:text="${cylinder.weight}"></td>
+            <td th:text="${cylinder.capacity}"></td>
+            <td th:text="${cylinder.fuels.fuel_type}"></td>
+            <td th:text="${cylinder.price}"></td>
+            <td th:text="${cylinder.quantity}"></td>
+            <td th:text="${cylinder.total_cost}"></td>
+
+            <td>
+                <a class="btn bg-info" th:href="@{/cylinders/{id}/edit_cylinder(id=${cylinder.id})}" >
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+                <a class="btn btn-danger" th:href="@{/cylinders/{id}/delete_cylinder(id=${cylinder.id})}" onclick="return confirmDelete()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5"></td>
+            <td>
+                <a class="btn btn-success" th:href="@{/cylinders/new}" role="button">
+                    <span class="glyphicon glyphicon-plus"></span>Add New Cylinder
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this cylinder?");
+    }
+</script>
+</html>

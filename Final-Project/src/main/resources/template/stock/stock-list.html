@@ -1,0 +1,45 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="/components/header"></th:block>
+
+<body>
+<main class="container">
+
+    <table class="table table-striped">
+        <thead class="light">
+        <tr>
+            <th scope="col">UUID</th>
+            <th scope="col">Cylinder</th>
+            <th scope="col">Fuel</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Unit Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">TotalCost</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="Stock :${allStocks}">
+            <td th:text="${Stock.id}"></td>
+            <td th:text="${Stock.cylinder.name}"></td>
+            <td th:text="${Stock.cylinder.fuels.fuel_type}"></td>
+            <td th:text="${Stock.cylinder.capacity}"></td>
+            <td th:text="${Stock.price}"></td>
+            <td th:text="${Stock.quantity}"></td>
+            <td th:text="${Stock.total_cost}"></td>
+
+            <td>
+                <a class="btn bg-warning" th:href="@{/{id}/edit_stock(id=${Stock.id})}" > <i class="bi bi-pencil-fill"> </i>Edit</a>
+                <a class="btn btn-danger" th:href="@{/{id}/delete_stock(id=${Stock.id})}" onclick="return confirmDelete()"> <i class="bi bi-trash"></i>Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this Stock?");
+    }
+</script>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home Gas Delivery</title>
+
+  <style>
+
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+
+
+    }
+
+    header {
+      background-color:white;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      margin-bottom: 30px;
+      height: 100px;
+
+    }
+
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+
+      margin-right: 20px;
+      font-size: 20px;
+      padding: 10px;
+    }
+
+    nav ul li a {
+      position: relative;
+      text-decoration: none;
+      color: black;
+      text-transform: uppercase;
+      transition: color 0.3s ease-in-out;
+    }
+
+    nav ul li a::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 4px; /* Adjust the height of the line as needed */
+      background-color: green;
+      transition: width 0.3s ease-in-out;
+    }
+
+    nav ul li a:hover {
+      color: green;
+    }
+
+    nav ul li a:hover::before {
+      width: 100%;
+    }
+    #logo{
+      width: 120px;
+      border-radius: 90%;
+      float: left;
+      margin-left: 30px;
+      margin-bottom: 30px;
+    }
+
+
+
+    .slideshow-container {
+      max-width: 800px;
+      position: relative;
+      margin: auto;
+    }
+
+    .mySlides {
+      display: none;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    /* Navigation dots style */
+    .dot {
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    .dot:hover {
+      background-color: #717171;
+    }
+
+
+
+
+    .text h1 {
+      font-size: 30px;
+      font-weight: bold;
+      color: black; /* Change the color to your preference */
+      text-align: center;
+      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow for better visibility */
+    }
+
+
+
+    button {
+      background-color: #4CAF50; /* Green background color */
+      color: white; /* White text color */
+      padding: 10px 20px; /* Add padding for better appearance */
+      font-size: 30px;
+      border: none; /* Remove default button border */
+      border-radius: 5px; /* Add rounded corners */
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.3s ease; /* Add a smooth transition effect */
+      margin: 50px;
+    }
+
+    button:hover {
+      background-color: #277dee; /* Darker green on hover */
+    }
+
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html"><img id="logo" src="https://th.bing.com/th/id/R.053cb5ea3ecf2f8305ad84d3a29b668e?rik=yq39VqTh5eGFJw&riu=http%3a%2f%2fwww.logotypes101.com%2flogos%2f590%2f9CF98F5C37F676DC887D3A72159FCA02%2flogogas.png&ehk=Pt9w1LlA06AxBkldnbyoJ%2fs3gUfk74%2byzVlS9EmwOFM%3d&risl=&pid=ImgRaw&r=0" alt=""></a>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="service.html">Services</a></li>
+      <li><a th:href="@{/customerOrders/new}">Orders</a></li>
+      <li><a th:href="@{/login}">Sign In</a></li>
+      <li><a th:href="@{/register}">Sign Up</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="slideshow-container">
+
+  <div class="mySlides fade">
+
+    <img src="https://th.bing.com/th/id/R.1767bcac5231db6b53bd9d0c9ad76e32?rik=o9FW40mN%2fX5whw&riu=http%3a%2f%2fwww.jinlantrade.com%2febay%2fRQZ39CMSR-HBS2301%2fm519-1.1.jpg%3f97669&ehk=aGXPDxQeJRDOEU8avfI0%2f6hLiJ7jK9o8RBt5baGSZB0%3d&risl=&pid=ImgRaw&r=0" alt="Image 2">
+    <div class="text">
+      <h1>Do you need to cook on modern stove?</h1>
+    </div>
+  </div>
+  <div class="mySlides fade">
+    <img src="https://th.bing.com/th/id/R.e8584e3cf316b72c1a23f4603ff117d4?rik=c3skgefyCXklQA&pid=ImgRaw&r=0" alt="">
+    <div class="text">
+      <h1>Do you need to cook without making your dishes dirty?</h1>
+    </div>
+  </div>
+  <div class="mySlides fade">
+    <img src="https://th.bing.com/th/id/R.1a51d93a6cfaff4a9e6bf931d302d834?rik=Xr6U5BW8TuX8vQ&riu=http%3a%2f%2fthyblackman.com%2fwp-content%2fuploads%2f2013%2f06%2fblackfamilyinkitchen.jpg&ehk=fa7aiwrVN7EkcbRiM%2boBj25WhDV%2btP2po4%2bW4ROSymc%3d&risl=&pid=ImgRaw&r=0" alt="">
+    <div class="text">
+      <h1>Do you need to cook with your family while enjoying your environment?</h1>
+    </div>
+  </div>
+  <div class="mySlides fade">
+    <img src="https://www.esi-africa.com/wp-content/uploads/2018/05/gas-cylinders.jpg" alt="">
+    <div class="text">
+      <h1>Home Gas Delivery is solution to all your questions; You order We deliver!</h1>
+    </div>
+  </div>
+
+
+
+  <!-- Add more slides as needed -->
+
+  <!-- Navigation dots -->
+  <div style="text-align:center">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <!-- Add more dots as needed -->
+  </div>
+</div>
+<div>
+  <center><a th:href="@{/customerOrders/new}"><button>Order Yours</button></a></center>
+
+</div>
+
+</body>
+</html>
+
+<script>
+  let slideIndex = 0;
+  showSlides();
+
+  function showSlides() {
+    let i;
+    const slides = document.getElementsByClassName("mySlides");
+    const dots = document.getElementsByClassName("dot");
+
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+
+    slideIndex++;
+
+    if (slideIndex > slides.length) {
+      slideIndex = 1;
+    }
+
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+
+    setTimeout(showSlides, 2000); // Change slide every 2 seconds
+  }
+</script>
+
