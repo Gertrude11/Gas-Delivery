@@ -13,5 +13,5 @@ public interface PaymentService {
     void updatePayment(Payment payment);
     Optional<Payment> findByID(UUID id);
     void deleteById(UUID id);
-    //void handleSuccessfulPayment(UUID id);
+    long countPayments();
 }

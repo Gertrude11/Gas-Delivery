@@ -78,7 +78,7 @@ public class CustomerOrderController {
         try {
             customerOrderService.saveCustomerOrder(customerOrder, model);
             //return "redirect:/orders/success"; // Redirect to a success page
-           return  "redirect:/customerOrders";
+           return  "redirect:/customerOrders?success";
         } catch (InsufficientQuantityException e) {
 
             model.addAttribute("errorMessage", e.getMessage());

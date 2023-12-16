@@ -1,17 +1,150 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<style>
-   img{
-       float: right;
-   }
-</style>
-<th:block th:include="/components/header"></th:block>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css">
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style>
+        img{
+            float: right;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+
+
+        }
+
+        header {
+            background-color:white;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            height: 100px;
+
+        }
+
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+
+            margin-right: 20px;
+            font-size: 20px;
+            padding: 10px;
+        }
+
+        nav ul li a {
+            position: relative;
+            text-decoration: none;
+            color: black;
+            text-transform: uppercase;
+            transition: color 0.3s ease-in-out;
+        }
+
+        nav ul li a::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 4px; /* Adjust the height of the line as needed */
+            background-color: green;
+            transition: width 0.3s ease-in-out;
+        }
+
+        nav ul li a:hover {
+            color: green;
+        }
+
+        nav ul li a:hover::before {
+            width: 100%;
+        }
+        #logo{
+            width: 120px;
+            border-radius: 90%;
+            float: left;
+            margin-left: 30px;
+            margin-bottom: 30px;
+        }
+
+
+
+
+
+
+
+        .text h1 {
+            font-size: 30px;
+            font-weight: bold;
+            color: black; /* Change the color to your preference */
+            text-align: center;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow for better visibility */
+        }
+
+
+
+        button {
+            background-color: #4CAF50; /* Green background color */
+            color: white; /* White text color */
+            padding: 10px 20px; /* Add padding for better appearance */
+            font-size: 30px;
+            border: none; /* Remove default button border */
+            border-radius: 5px; /* Add rounded corners */
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease; /* Add a smooth transition effect */
+            margin: 50px;
+        }
+
+        button:hover {
+            background-color: #277dee; /* Darker green on hover */
+        }
+
+    </style>
+
+    <title>Home Gas Delivery</title>
+</head>
+
 
 <body>
-<script th:if="${errorMessage != null}">
-    alert([[${errorMessage}]]); // Using double brackets to avoid Thymeleaf processing
-</script>
+<header>
+    <a href="index.html"><img id="logo" src="https://th.bing.com/th/id/R.053cb5ea3ecf2f8305ad84d3a29b668e?rik=yq39VqTh5eGFJw&riu=http%3a%2f%2fwww.logotypes101.com%2flogos%2f590%2f9CF98F5C37F676DC887D3A72159FCA02%2flogogas.png&ehk=Pt9w1LlA06AxBkldnbyoJ%2fs3gUfk74%2byzVlS9EmwOFM%3d&risl=&pid=ImgRaw&r=0" alt=""></a>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/customerOrders/new}">Orders</a></li>
+            <li><a th:href="@{/login}">Sign In</a></li>
+            <li><a th:href="@{/register}">Sign Up</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+
+
 
 <main class="container">
+    <script th:if="${errorMessage != null}">
+        alert([[${errorMessage}]]); // Using double brackets to avoid Thymeleaf processing
+    </script>
+
+    <div th:if="${param.errorMessage}" class="alert alert-danger">Greater quantity</div>
+
+
     <img src="https://th.bing.com/th/id/OIP.B2kFzDah5Sbj2k1Fr04f9QHaHa?rs=1&pid=ImgDetMain
     ">
     <h2 class="text-center">Create New order</h2>

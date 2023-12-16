@@ -1,8 +1,8 @@
 package com.Gertrude.Final.Project.model;
 
 public enum EFuel {
-    GAS,
-    ESSENCE,
-    MAZUTU
+    NATURAL_GAS,
+    LIQUEFIED_PETROLEUM_GAS_LPG
+
 
 }

@@ -83,6 +83,11 @@ public class CustomerOrderImpl implements CustomerOrderService {
 
     }
 
+    @Override
+    public long countOrder() {
+        return repo.count();
+    }
+
 //    @Override
 //    public CustomerOrder placeOrder(CustomerOrder customerOrder) {
 //        List<Cylinder> cylinders = customerOrder.getCylinders();

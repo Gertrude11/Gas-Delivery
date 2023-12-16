@@ -15,4 +15,5 @@ public interface CylinderService {
     void deleteById(UUID id);
     Cylinder findCylinderByCode(String code);
     void updateQuantityAndTotalCost(int orderQuantity,Cylinder cylinder);
+    long countCylinders();
 }

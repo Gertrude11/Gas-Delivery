@@ -54,5 +54,10 @@ public class PaymentImpl implements PaymentService {
         repo.deleteById(id);
     }
 
+    @Override
+    public long countPayments() {
+        return repo.count();
+    }
+
 
 }

@@ -12,4 +12,5 @@ public interface FuelService {
     void updateFuel(Fuel fuel);
     Optional<Fuel> findByID(UUID id);
     void deleteById(UUID id);
+    long countFuels();
 }

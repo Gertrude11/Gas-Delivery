@@ -50,6 +50,7 @@ public class UserImpl implements UserService {
     }
 
 
+
     @Override
     public List<UserDto> findAllUsers() {
         List<User> users = userRepository.findAll();

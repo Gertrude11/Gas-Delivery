@@ -88,7 +88,10 @@ public class CylinderImpl implements CylinderService {
 
     }
 
-
+    @Override
+    public long countCylinders() {
+        return repo.count();
+    }
 
 
 }

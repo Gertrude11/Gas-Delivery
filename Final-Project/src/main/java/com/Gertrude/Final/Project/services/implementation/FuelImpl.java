@@ -39,4 +39,9 @@ public class FuelImpl implements FuelService {
     public void deleteById(UUID id) {
         repo.deleteById(id);
     }
+
+    @Override
+    public long countFuels() {
+        return repo.count();
+    }
 }

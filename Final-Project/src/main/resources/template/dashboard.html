@@ -19,6 +19,62 @@
             font-family: 'Arial', sans-serif;
         }
 
+
+        /* contact head design */
+        .contact-info{
+            text-align: center;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .contact-header h5 {
+            color: #007BFF;
+            font-size: 25px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .contact-header h1 {
+            font-size: 32px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        /*contact info design*/
+
+        .contact-item {
+            position: relative;
+            display: inline-block;
+            width: 250px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin: 10px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.2s;
+            left: 100px;
+
+        }
+
+        .contact-item:hover {
+            transform: scale(1.1);
+            color: #0095da;
+        }
+
+        .contact-item img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+        }
+
+        .contact-item h4 {
+            margin: 0;
+            font-weight: bold;
+        }
+
         .sidebar {
             height: 100%;
             width: 250px;
@@ -45,6 +101,10 @@
         .content {
             margin-left: 250px;
             padding: 16px;
+            text-align: center;
+            font-style: italic;
+            font-weight: bold;
+            color: green;
         }
         img{
             width: 50%;
@@ -67,13 +127,33 @@
     <a href="#"><i class="fas fa-cog"></i> Settings</a>
     <a th:href="@{/logout}"> <span class="glyphicon glyphicon-log-out"></span>Logout</a>
 </div>
+<main>
+    <div class="content">
+    <h1>Welcome To Admin Dashboard</h1>
+    <p>See How you Business is growing.</p>
 
-<div class="content">
-    <h2>Main Content</h2>
-    <p>Your dashboard content goes here.</p>
+    </div>
+    <div class="contact-info">
+        <div class="contact-item">
+            <img src="https://static.vecteezy.com/system/resources/previews/000/566/875/original/liquid-propane-gas-icon-vector.jpg" alt="call">
+            <h4 th:text="${fuelCount + ' Number of Fuel Registered'}"> </h4>
+        </div>
+        <div class="contact-item">
+            <img src="https://static.vecteezy.com/system/resources/previews/000/083/714/original/free-vector-gas-cylinders.jpg" alt="location">
+            <h4 th:text="${cylinderCount + ' Number of Cylinder Registered'}"> </h4>
+        </div>
+        <div class="contact-item">
+            <img src="https://th.bing.com/th/id/OIP.92qAPzADRQDjBTnyquLJGAHaHa?rs=1&pid=ImgDetMain" alt="email">
+            <h4 th:text="${paymentCount + ' Number of Payment Registered'}"> </h4>
+        </div>
+        <div class="contact-item">
+            <img src="https://th.bing.com/th/id/R.96591cbc0ba5069fea4df627a8e584e8?rik=smUCewqF5EIZUg&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_509212.png&ehk=mRdEpASxOkHGdcardaPxzX4OH1BRGr2CbqlDvfNzIIg%3d&risl=&pid=ImgRaw&r=0" alt="email">
+            <h4 th:text="${orderCount + ' Number of Orders Registered'}"> </h4>
+        </div>
+    </div>
 
-    </main>
-</div>
+</main>
+
 
 <!-- Bootstrap JS (optional) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

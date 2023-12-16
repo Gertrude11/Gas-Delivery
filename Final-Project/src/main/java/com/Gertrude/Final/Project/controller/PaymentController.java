@@ -86,13 +86,5 @@ public class PaymentController {
         paymentService.deleteById(id);
         return "redirect:/payments";
     }
-//    @PostMapping("/process/{orderId}")
-//    public ResponseEntity<String> processPayment(@PathVariable UUID orderId) {
-//        try {
-//            paymentService.handleSuccessfulPayment(orderId);
-//            return ResponseEntity.ok("Payment processed successfully");
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing payment: " + e.getMessage());
-//        }
-//    }
+
 }

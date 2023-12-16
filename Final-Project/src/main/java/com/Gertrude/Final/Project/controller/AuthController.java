@@ -4,6 +4,8 @@ package com.Gertrude.Final.Project.controller;
 import com.Gertrude.Final.Project.dto.UserDto;
 import com.Gertrude.Final.Project.model.User;
 import jakarta.validation.Valid;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import com.Gertrude.Final.Project.services.UserService;
@@ -23,14 +25,11 @@ public class AuthController {
     }
 
     // handler method to handle home page request
-    @GetMapping("/index")
+    @GetMapping("/")
     public String home(){
         return "index";
     }
-    @GetMapping("/dashboard")
-    public String dashboard(){
-        return "dashboard";
-    }
+
 
     // handler method to handle login request
     @GetMapping("/login")
@@ -75,5 +74,7 @@ public class AuthController {
         model.addAttribute("users", users);
         return "registered-users";
     }
+
+
 }
 

@@ -15,5 +15,6 @@ public interface CustomerOrderService {
     void deleteById(UUID id);
     void processOrder(CustomerOrder customerOrder);
    // CustomerOrder placeOrder(CustomerOrder customerOrder);
+    long countOrder();
 
 }

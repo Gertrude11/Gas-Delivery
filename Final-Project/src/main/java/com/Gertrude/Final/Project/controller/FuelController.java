@@ -23,7 +23,7 @@ public class FuelController {
 
 
     private FuelService fuelService;
-  //  private CylinderService cylinderService;
+
 
     @Autowired
     public FuelController(FuelService fuelService) {
@@ -42,9 +42,7 @@ public class FuelController {
     @GetMapping("/fuels/new")
     public String newFuelForm(Model model) {
         Fuel Fuel = new Fuel();
-      //  List<Cylinder> cylinder = cylinderService.getAllCylinders();// get  all cylinder combo box
         List<EFuel> fuel_type = Arrays.stream(EFuel.values()).toList(); // get all book categories to be populated in category combo box
-       // model.addAttribute("allCylinder", cylinder);
         model.addAttribute("fuel", Fuel);
         model.addAttribute("types", fuel_type);
         return "/fuel/new-fuel";
