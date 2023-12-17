@@ -59,12 +59,5 @@ public class CustomerOrder {
     public String getCustomerEmail() {
         return email;
     }
-//    public void processOrder() {
-//        for (Cylinder cylinder : cylinders) {
-//            cylinder.updateQuantityAndTotalCost(quantity);
-//        }
-//        // Set the order as paid, update delivery status, etc.
-//        //paid = true;
-//
-//    }
+
 }
