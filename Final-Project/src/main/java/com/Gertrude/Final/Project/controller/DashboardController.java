@@ -32,38 +32,6 @@ public class DashboardController {
     }
 
 
-
-
-
-
-
-
-
-//    @GetMapping("/dashboard")
-//        public String adminDashboard(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-//
-//        String email = userDetails.getUsername();
-//
-//        // Fetch user-specific data using the email
-//        User userDto = userService.findUserByEmail(email);
-//
-//        // Add the user-specific data to the model
-//        model.addAttribute("user", userDto);
-//            long fuelCount = fuelService.countFuels();
-//            long cylinderCount = cylinderService.countCylinders();
-//            long paymentCount = paymentService.countPayments();
-//            long orderCount = customerOrderService.countOrder();
-//
-//
-//            // Add calculated numbers to the model
-//            model.addAttribute("fuelCount", fuelCount);
-//            model.addAttribute("cylinderCount", cylinderCount);
-//             model.addAttribute("paymentCount", paymentCount);
-//        model.addAttribute("orderCount", orderCount);
-//
-//            return "dashboard";
-//        }
-
     @GetMapping("/dashboard")
     public String adminDashboard(@AuthenticationPrincipal UserDetails userDetails, Model model) {
 
