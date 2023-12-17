@@ -4,11 +4,14 @@ package com.Gertrude.Final.Project.controller;
 import com.Gertrude.Final.Project.model.User;
 import com.Gertrude.Final.Project.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.Collection;
 
 @Controller
 public class DashboardController {
@@ -36,8 +39,33 @@ public class DashboardController {
 
 
 
+//    @GetMapping("/dashboard")
+//        public String adminDashboard(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+//
+//        String email = userDetails.getUsername();
+//
+//        // Fetch user-specific data using the email
+//        User userDto = userService.findUserByEmail(email);
+//
+//        // Add the user-specific data to the model
+//        model.addAttribute("user", userDto);
+//            long fuelCount = fuelService.countFuels();
+//            long cylinderCount = cylinderService.countCylinders();
+//            long paymentCount = paymentService.countPayments();
+//            long orderCount = customerOrderService.countOrder();
+//
+//
+//            // Add calculated numbers to the model
+//            model.addAttribute("fuelCount", fuelCount);
+//            model.addAttribute("cylinderCount", cylinderCount);
+//             model.addAttribute("paymentCount", paymentCount);
+//        model.addAttribute("orderCount", orderCount);
+//
+//            return "dashboard";
+//        }
+
     @GetMapping("/dashboard")
-        public String adminDashboard(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+    public String adminDashboard(@AuthenticationPrincipal UserDetails userDetails, Model model) {
 
         String email = userDetails.getUsername();
 
@@ -46,20 +74,32 @@ public class DashboardController {
 
         // Add the user-specific data to the model
         model.addAttribute("user", userDto);
-            long fuelCount = fuelService.countFuels();
-            long cylinderCount = cylinderService.countCylinders();
-            long paymentCount = paymentService.countPayments();
-            long orderCount = customerOrderService.countOrder();
 
+        // Get the roles of the authenticated user
+        Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
 
-            // Add calculated numbers to the model
-            model.addAttribute("fuelCount", fuelCount);
-            model.addAttribute("cylinderCount", cylinderCount);
-             model.addAttribute("paymentCount", paymentCount);
+        // Check if the user has the ADMIN role
+        boolean isAdmin = authorities.stream()
+                .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
+
+        // Add a flag to the model indicating whether the user is an admin
+        model.addAttribute("isAdmin", isAdmin);
+
+        // Add other data to the model
+        long fuelCount = fuelService.countFuels();
+        long cylinderCount = cylinderService.countCylinders();
+        long paymentCount = paymentService.countPayments();
+        long orderCount = customerOrderService.countOrder();
+
+        // Add calculated numbers to the model
+        model.addAttribute("fuelCount", fuelCount);
+        model.addAttribute("cylinderCount", cylinderCount);
+        model.addAttribute("paymentCount", paymentCount);
         model.addAttribute("orderCount", orderCount);
 
-            return "dashboard";
-        }
+        return "dashboard";
+    }
+
 
 
 }

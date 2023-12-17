@@ -156,19 +156,24 @@
         <div class="row col-5">
             <div class="form-group col">
                 <label >Full Names</label>
-                <input type="text" class="form-control" id="names" name="names" th:field="*{fullNames}" required>
+                <input type="text" class="form-control" id="names" name="names" th:field="*{fullNames}" required
+                       pattern="^[A-Za-z\s]{1,}$"
+                       title="Please enter valid full names">
             </div>
         </div>
         <div class="row col-5">
             <div class="form-group col">
                 <label >Phone Number</label>
-                <input type="text" class="form-control" id="phone" name="phone" th:field="*{phone}" required>
+                <input type="text" class="form-control" id="phone" name="phone" th:field="*{phone}"
+                       required pattern="07[0-9]{8}" title="Please enter a valid 10-digit phone number">
             </div>
         </div>
         <div class="row col-5">
             <div class="form-group col">
                 <label >Email</label>
-                <input type="email" class="form-control" id="email" name="email" th:field="*{email}" required>
+                <input type="email" class="form-control" id="email" name="email" th:field="*{email}" required
+                       pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                       title="Please enter a valid email address">
             </div>
         </div>
 
@@ -195,13 +200,18 @@
         <div class="row col-5">
             <div class="form-group col">
                 <label >Quantity</label>
-                <input type="text" class="form-control" id="quantity" name="quantity" th:field="*{quantity}" required>
+                <input type="text" class="form-control" id="quantity" name="quantity" th:field="*{quantity}" required
+                       pattern="^[1-9]\d*$"
+                       title="Please enter a valid quantity (positive integer)">
             </div>
         </div>
         <div class="row col-5">
             <div class="form-group col">
                 <label >Destination / Delivery Place</label>
-                <input type="text" class="form-control" id="destination" name="destination" th:field="*{destination}" required>
+                <input type="text" class="form-control" id="destination" name="destination" th:field="*{destination}"
+                       required
+                       pattern="^[A-Za-z\s\d-.,]{1,}$"
+                       title="Please enter a valid destination/place"
             </div>
         </div>
         <div class="row col-5">
@@ -309,5 +319,6 @@
             // Update the total cost in the input field
             totalCostInput.value = totalCost.toFixed(2);
         }
+
     });
 </script>

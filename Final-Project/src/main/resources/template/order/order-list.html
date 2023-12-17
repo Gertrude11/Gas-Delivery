@@ -80,8 +80,8 @@
 
 <div class="main">
     <h1>Customer Orders</h1>
-    <input type="text" id="searchInput" oninput="filterOrders()" placeholder="Search...">
-    <input type="text" id="searchInputs" oninput="filterOrdersByNames()" placeholder="Search Names...">
+    <h4>Pay For Order if Payment is not done yet</h4>
+    <input type="text" id="searchInput" oninput="filterOrders()" placeholder="Search Order Index...">
 
 
     <ul class="cards">
@@ -96,7 +96,7 @@
 
                     <div class="card_content" data-name="${order.fullNames}">
                         <!-- Incremented order number -->
-                        <h2 class="card_title" th:text="${orderStat.index + 1}">Order Title</h2>
+                        <h2 class="card_title" th:text="${orderStat.index + 1 + '- Order Index'}">Order Title</h2>
                         <!-- Rest of your card content -->
 
 
@@ -127,10 +127,10 @@
 
                     <p th:if="${order.paid}" class="done-icon ">✔ Payment Done</p>
 
-                    <a th:href="@{/{orderId}/makepayment (orderId=${order.id})}">
-                        <button class="btn card_btn">Read More</button>
-                    </a>
-                    </div>u
+                        <a th:if="${!order.paid}" th:href="@{/{orderId}/makepayment(orderId=${order.id})}">
+                            <button class="btn card_btn">PAY HERE</button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </li>
@@ -165,42 +165,42 @@
     }
 
 
-    function filterOrdersByNames() {
-        console.log("Function called!");
-
-        var input = document.getElementById('searchInputs');
-
-        if (input) {
-            var filter = input.value.toUpperCase();
-            var cards = document.getElementsByClassName('order-card');
-
-            for (var i = 0; i < cards.length; i++) {
-                var card = cards[i];
-                var cardContent = card.querySelector('.card_content');
-
-                if (cardContent) {
-                    var name = cardContent.getAttribute('data-name');
-
-                    if (name !== null && name !== undefined) {
-                        var txtValue = name.toUpperCase();
-
-                        if (txtValue.includes(filter)) {
-                            card.classList.remove('hidden');
-                        } else {
-                            card.classList.add('hidden');
-                        }
-                    } else {
-                        console.log("Data-name attribute is null or undefined for card:", card);
-                        card.classList.add('hidden');
-                    }
-                } else {
-                    console.log("Card content element not found for card:", card);
-                }
-            }
-        } else {
-            console.log("Input element with ID 'searchInputs' not found.");
-        }
-    }
+    // function filterOrdersByNames() {
+    //     console.log("Function called!");
+    //
+    //     var input = document.getElementById('searchInputs');
+    //
+    //     if (input) {
+    //         var filter = input.value.toUpperCase();
+    //         var cards = document.getElementsByClassName('order-card');
+    //
+    //         for (var i = 0; i < cards.length; i++) {
+    //             var card = cards[i];
+    //             var cardContent = card.querySelector('.card_content');
+    //
+    //             if (cardContent) {
+    //                 var name = cardContent.getAttribute('data-name');
+    //
+    //                 if (name !== null && name !== undefined) {
+    //                     var txtValue = name.toUpperCase();
+    //
+    //                     if (txtValue.includes(filter)) {
+    //                         card.classList.remove('hidden');
+    //                     } else {
+    //                         card.classList.add('hidden');
+    //                     }
+    //                 } else {
+    //                     console.log("Data-name attribute is null or undefined for card:", card);
+    //                     card.classList.add('hidden');
+    //                 }
+    //             } else {
+    //                 console.log("Card content element not found for card:", card);
+    //             }
+    //         }
+    //     } else {
+    //         console.log("Input element with ID 'searchInputs' not found.");
+    //     }
+    // }
 
 
 
